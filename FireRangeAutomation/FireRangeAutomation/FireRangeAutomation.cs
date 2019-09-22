@@ -18,7 +18,9 @@ namespace FireRangeAutomation
         List<int> targetScores2 = new List<int>();
         List<int> targetScores3 = new List<int>();
         List<int> targetScores4 = new List<int>();
-        List<int>total=new List<int>();
+        List<double> totalScores = new List<double>();
+        List<double> averageScores = new List<double>();
+        List<double> topAverageScores = new List<double>();
         public FireRangeAutomation()
         {
             InitializeComponent();
@@ -32,22 +34,32 @@ namespace FireRangeAutomation
             targetScores2.Add(Convert.ToInt32(taget2TextBox.Text));
             targetScores3.Add(Convert.ToInt32(taget3TextBox.Text));
             targetScores4.Add(Convert.ToInt32(taget4TextBox.Text));
-            string see = "";
+            totalScores.Add(Convert.ToInt32(taget1TextBox.Text)+ Convert.ToInt32(taget2TextBox.Text)+ Convert.ToInt32(taget3TextBox.Text)+ Convert.ToInt32(taget4TextBox.Text));
+            
             for (int i = soldierNos.Count() - 1; i < soldierNos.Count(); i++)
             {
-
-                see += "\nSoldier No. " + soldierNos[i] + "\n";
-                see += "Soldier Name: " + soldierNames[i]+"\n";
-
+                double avr = totalScores[i] / 4;
+                averageScores.Add(avr);
+                soldierListBox.Items.Add("Soldier ID: " + soldierNos[i]);
+                soldierListBox.Items.Add("Soldier Name: "+soldierNames[i] + "\n");
+                soldierListBox.Items.Add("Target 1 Score: " + targetScores1[i] + "\n");
+                soldierListBox.Items.Add("Target 2 Score: " + targetScores2[i] + "\n");
+                soldierListBox.Items.Add("Target 3 Score: " + targetScores3[i] + "\n");
+                soldierListBox.Items.Add("Target 4 Score: " + targetScores4[i] + "\n");
+                soldierListBox.Items.Add("Total Score: " + totalScores[i] + "\n");
+                soldierListBox.Items.Add("Average Score: " + averageScores[i] +"\n");
+                
             }
             
 
-            soldierRichTextBox.Text += (see);
+
+
 
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            soldierListBox.Items.Clear();
             try
             {
                 if (soldierNos.Contains(Convert.ToInt32(soldierNoTextBox.Text)) == true)
@@ -64,40 +76,31 @@ namespace FireRangeAutomation
                MessageBox.Show(exception.Message);
                 
             }
-           
-            
-
-
-
-        }
-
-        private void FireRangeAutomation_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void taget2TextBox_TextChanged(object sender, EventArgs e)
-        {
-
+                  
         }
 
         private void ShowInfo()
         {
-            string see = "";
-            for (int i = soldierNos.Count() - 1; i < soldierNos.Count(); i++)
+
+            for (int i = 0; i < soldierNos.Count(); i++)
             {
-
-                see += "\nSoldier No. " + soldierNos[i] + "\n";
-                see += "Soldier Name: " + soldierNames[i] + "\n";
-
+                soldierListBox.Items.Add("Soldier ID: " + soldierNos[i]);
+                soldierListBox.Items.Add("Soldier Name: " + soldierNames[i] + "\n");
+                soldierListBox.Items.Add("Target 1 Score: " + targetScores1[i] + "\n");
+                soldierListBox.Items.Add("Target 2 Score: " + targetScores2[i] + "\n");
+                soldierListBox.Items.Add("Target 3 Score: " + targetScores3[i] + "\n");
+                soldierListBox.Items.Add("Target 4 Score: " + targetScores4[i] + "\n");
+                soldierListBox.Items.Add("Total Score: " + totalScores[i] + "\n");
+                soldierListBox.Items.Add("Average Score: " + averageScores[i] + "\n");
             }
 
-
-            soldierRichTextBox.Text += (see);
         }
+        
         private void showAllButton_Click(object sender, EventArgs e)
         {
-           ShowInfo();
+            soldierListBox.Items.Clear();
+            ShowInfo();
+            //TopCounter();
         }
 
         private void SearchInfo()
@@ -109,13 +112,14 @@ namespace FireRangeAutomation
                     if(soldierNos.Contains(Convert.ToInt32(searchTextBox.Text)))
                     {
                         int i = soldierNos.IndexOf(Convert.ToInt32(searchTextBox.Text));
-                        string see = "";
-                        
-                            see += soldierNos[i]+"\n";
-                            see += soldierNames[i] + "\n";
-                        
-
-                        soldierRichTextBox.Text += see;
+                        soldierListBox.Items.Add("Soldier ID: " + soldierNos[i]);
+                        soldierListBox.Items.Add("Soldier Name: " + soldierNames[i] + "\n");
+                        soldierListBox.Items.Add("Target 1 Score: " + targetScores1[i] + "\n");
+                        soldierListBox.Items.Add("Target 2 Score: " + targetScores2[i] + "\n");
+                        soldierListBox.Items.Add("Target 3 Score: " + targetScores3[i] + "\n");
+                        soldierListBox.Items.Add("Target 4 Score: " + targetScores4[i] + "\n");
+                        soldierListBox.Items.Add("Total Score: " + totalScores[i] + "\n");
+                        soldierListBox.Items.Add("Average Score: " + averageScores[i] + "\n");
                     }
 
                 }
@@ -131,13 +135,15 @@ namespace FireRangeAutomation
                 {
                     if (soldierNames.Contains(searchTextBox.Text))
                     {
-                        string see = "";
-                        int i = soldierNames.IndexOf(searchTextBox.Text);
-                        
-                            see += soldierNos[i] + "\n";
-                            see += soldierNames[i] + "\n";
-                        
-                        soldierRichTextBox.Text += see;
+                        int i = soldierNos.IndexOf(Convert.ToInt32(searchTextBox.Text));
+                        soldierListBox.Items.Add("Soldier ID: " + soldierNos[i]);
+                        soldierListBox.Items.Add("Soldier Name: " + soldierNames[i] + "\n");
+                        soldierListBox.Items.Add("Target 1 Score: " + targetScores1[i] + "\n");
+                        soldierListBox.Items.Add("Target 2 Score: " + targetScores2[i] + "\n");
+                        soldierListBox.Items.Add("Target 3 Score: " + targetScores3[i] + "\n");
+                        soldierListBox.Items.Add("Target 4 Score: " + targetScores4[i] + "\n");
+                        soldierListBox.Items.Add("Total Score: " + totalScores[i] + "\n");
+                        soldierListBox.Items.Add("Average Score: " + averageScores[i] + "\n");
                     }
                 }
                 catch (Exception e)
@@ -148,6 +154,7 @@ namespace FireRangeAutomation
         }
         private void SearchButton_Click(object sender, EventArgs e)
         {
+            soldierListBox.Items.Clear();
             SearchInfo();
         }
     }
