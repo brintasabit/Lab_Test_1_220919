@@ -20,7 +20,7 @@ namespace FireRangeAutomation
         List<int> targetScores4 = new List<int>();
         List<double> totalScores = new List<double>();
         List<double> averageScores = new List<double>();
-        List<double> topAverageScores = new List<double>();
+        
         public FireRangeAutomation()
         {
             InitializeComponent();
@@ -95,12 +95,34 @@ namespace FireRangeAutomation
             }
 
         }
+        private void TopCounter()
+        {
+            double max = averageScores.Max();
+            double max2 = totalScores.Max();
+           
+                if (averageScores.Contains(max))
+                {
+                int i = averageScores.IndexOf(max);
+                topAverageScorerTextBox.Text = soldierNames[i];
+                }
+                if(totalScores.Contains(max2))
+                {
+                int i = totalScores.IndexOf(max2);
+                topTotalScorerTextBox.Text = soldierNames[i];
+                }
+
+                
+            
+            
+                
+            
+        }
         
         private void showAllButton_Click(object sender, EventArgs e)
         {
             soldierListBox.Items.Clear();
             ShowInfo();
-            //TopCounter();
+            TopCounter();
         }
 
         private void SearchInfo()
@@ -135,7 +157,7 @@ namespace FireRangeAutomation
                 {
                     if (soldierNames.Contains(searchTextBox.Text))
                     {
-                        int i = soldierNos.IndexOf(Convert.ToInt32(searchTextBox.Text));
+                        int i = soldierNames.IndexOf(searchTextBox.Text);
                         soldierListBox.Items.Add("Soldier ID: " + soldierNos[i]);
                         soldierListBox.Items.Add("Soldier Name: " + soldierNames[i] + "\n");
                         soldierListBox.Items.Add("Target 1 Score: " + targetScores1[i] + "\n");
